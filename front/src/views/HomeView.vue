@@ -2,7 +2,7 @@
 
 <template>
   <main>
-    <h1>Some examples about Redis:</h1>
+    <h1>Some visual examples about Redis:</h1>
     <nav>
       <a href="#" class="button">Hyperloglog</a>
       <a href="#" class="button primary">Streams</a>
