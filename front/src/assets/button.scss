@@ -1,0 +1,42 @@
+button,
+a.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  padding: 0.5em 1em;
+
+  color: inherit;
+  text-decoration: inherit;
+
+  &:disabled {
+    border: 0.05em solid #aaa;
+    color: #aaa;
+  }
+
+  &:not(:disabled) {
+    border: 0.05em solid black;
+    background-color: transparent;
+    color: black;
+
+    &:hover {
+      background-color: #eee;
+    }
+    &:active {
+      background-color: #ddd;
+    }
+
+    &.primary {
+      background-color: #222;
+      color: #eee;
+
+      &:hover {
+        background-color: #444;
+      }
+      &:active {
+        background-color: #555;
+      }
+    }
+  }
+}
