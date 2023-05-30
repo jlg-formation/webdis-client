@@ -19,15 +19,18 @@ header {
   padding: 0 0.5em;
 
   a {
+    border: 0.02em solid transparent;
     display: flex;
     align-items: center;
     gap: 0.5em;
+
+    padding: 0 0.5em;
 
     text-decoration: inherit;
     color: inherit;
 
     &:hover {
-      text-decoration: underline;
+      border-color: black;
     }
 
     img {
