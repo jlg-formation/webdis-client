@@ -1,7 +1,11 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <main>
+    <h1>Legal</h1>
+    <p>
+      Open Source website:
+      <a href="#" target="_blank">to be filled</a>
+    </p>
+  </main>
 </template>
 
 <style>
