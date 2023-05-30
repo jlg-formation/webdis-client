@@ -16,10 +16,10 @@ header {
   display: flex;
   align-items: center;
 
-  padding: 0 0.5em;
-
   a {
-    border: 0.02em solid transparent;
+    border-right: 0.02em solid transparent;
+    border-bottom: 0.02em solid transparent;
+    height: 3em;
     display: flex;
     align-items: center;
     gap: 0.5em;
@@ -31,6 +31,7 @@ header {
 
     &:hover {
       border-color: black;
+      background-color: #eee;
     }
 
     img {

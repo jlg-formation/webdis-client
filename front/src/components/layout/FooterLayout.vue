@@ -14,13 +14,19 @@ footer {
   align-items: center;
   justify-content: center;
   a {
-    padding: 0.5em;
-    border: 0.02em solid transparent;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 2em;
+    border-left: 0.02em solid transparent;
+    border-right: 0.02em solid transparent;
     text-decoration: inherit;
     color: inherit;
 
     &:hover {
       border-color: black;
+      background-color: #eee;
     }
   }
 }
