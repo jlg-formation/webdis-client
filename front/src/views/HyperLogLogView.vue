@@ -1,21 +1,57 @@
 <script setup lang="ts">
+import { webdis } from '@/webdis/Webdis'
 import { ref } from 'vue'
 
 const cardinality = ref(0)
+const total = ref(1)
+const processing = ref(false)
+
+const handleAdd = async () => {
+  try {
+    console.log('submit')
+    processing.value = true
+    for (let i = 0; i < total.value; i++) {
+      await webdis.send('PFADD members ' + crypto.randomUUID())
+    }
+  } catch (err) {
+    console.log('err: ', err)
+  } finally {
+    processing.value = false
+  }
+}
+
+const handleGet = async () => {
+  try {
+    console.log('submit')
+    const result: { PFCOUNT: number } = await webdis.send('PFCOUNT members')
+    console.log('result: ', result)
+    cardinality.value = result.PFCOUNT
+  } catch (err) {
+    console.log('err: ', err)
+  }
+}
+const handleRemove = async () => {
+  try {
+    console.log('remove')
+    await webdis.send('DEL members')
+  } catch (err) {
+    console.log('err: ', err)
+  }
+}
 </script>
 
 <template>
   <main>
     <h1>HyperLogLog</h1>
     <div class="content">
-      <form class="add">
+      <form class="add" @submit.prevent="handleAdd">
         <label>
           <span>Nbr of random elements to add in the set</span>
-          <input type="number" value="1" />
+          <input type="number" v-model="total" />
         </label>
-        <button>Add</button>
+        <button :disabled="processing">Add</button>
       </form>
-      <form class="get">
+      <form class="get" @submit.prevent="handleGet">
         <div class="cardinality">
           <span>Cardinality: </span>
           <span>
@@ -23,6 +59,9 @@ const cardinality = ref(0)
           </span>
         </div>
         <button>Refresh Cardinality</button>
+      </form>
+      <form class="remove" @submit.prevent="handleRemove">
+        <button>Reset</button>
       </form>
     </div>
   </main>

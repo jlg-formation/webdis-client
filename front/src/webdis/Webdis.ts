@@ -1,14 +1,15 @@
 class Webdis {
   tested = false
   url = 'http://127.0.0.1:7379'
-  async send(...args: string[]): Promise<any> {
-    const response = await fetch(this.url + '/' + this.parseCommand(...args))
+  async send(command: string): Promise<any> {
+    console.log('command: ', command)
+    const response = await fetch(this.url + '/' + this.parseCommand(command))
     const json: object = await response.json()
     console.log('json: ', json)
     return json
   }
-  parseCommand(...args: string[]) {
-    return args.join('/')
+  parseCommand(command: string) {
+    return command.replace(/ /g, '/')
   }
 }
 
