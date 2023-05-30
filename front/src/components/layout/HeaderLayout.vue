@@ -2,10 +2,10 @@
 
 <template>
   <header>
-    <a href="#">
+    <RouterLink to="/">
       <img src="images/logo.svg" alt="Redis Client" />
       <span>Web Tester</span>
-    </a>
+    </RouterLink>
   </header>
 </template>
 

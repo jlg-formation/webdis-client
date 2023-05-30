@@ -4,8 +4,8 @@
   <main>
     <h1>Some visual examples about Redis:</h1>
     <nav>
-      <a href="#" class="button">Hyperloglog</a>
-      <a href="#" class="button primary">Streams</a>
+      <RouterLink to="hyperloglog" class="button">Hyperloglog</RouterLink>
+      <RouterLink to="stream" class="button primary">Streams</RouterLink>
     </nav>
   </main>
 </template>
