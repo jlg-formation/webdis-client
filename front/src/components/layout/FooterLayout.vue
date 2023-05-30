@@ -2,7 +2,7 @@
 
 <template>
   <footer>
-    <a href="#">Legal</a>
+    <RouterLink to="/legal">Legal</RouterLink>
   </footer>
 </template>
 
