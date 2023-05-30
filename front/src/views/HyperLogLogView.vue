@@ -16,10 +16,13 @@ const cardinality = ref(0)
         <button>Add</button>
       </form>
       <form class="get">
-        <button>Get cardinality</button>
         <div class="cardinality">
-          {{ cardinality }}
+          <span>Cardinality: </span>
+          <span>
+            {{ cardinality }}
+          </span>
         </div>
+        <button>Refresh Cardinality</button>
       </form>
     </div>
   </main>
@@ -30,7 +33,7 @@ div.content {
   display: flex;
   flex-flow: column;
   align-items: start;
-  gap: 0.5em;
+  gap: 2em;
 }
 form.add {
   display: flex;
@@ -39,13 +42,16 @@ form.add {
 }
 
 form.get {
+  width: 100%;
   display: flex;
   gap: 0.5em;
+  justify-content: space-between;
 
   div.cardinality {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5em;
   }
 }
 </style>
