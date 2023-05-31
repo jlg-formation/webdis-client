@@ -28,13 +28,10 @@ export const useStreamStore = defineStore('stream', () => {
   }
 
   const refresh = async () => {
-    console.log('refresh')
     const result: { XRANGE: StreamItem[] } = await webdis.send('XRANGE mystream - +')
-    console.log('result: ', result)
     items.value = result.XRANGE
 
     const consumerGroupResult: { XINFO: any[] } = await webdis.send('XINFO GROUPS mystream')
-    console.log('consumerGroupResult: ', consumerGroupResult)
     if (consumerGroupResult.XINFO.length === 2 && consumerGroupResult.XINFO[0] === false) {
       return
     }
@@ -54,19 +51,16 @@ export const useStreamStore = defineStore('stream', () => {
   }
 
   const createConsumerGroup = async (name: string) => {
-    console.log('create consumer group')
     await webdis.send(`XGROUP CREATE mystream ${name} 0-0`)
     refresh()
   }
 
   const createWorker = async (consumerGroupName: string, workerName: string) => {
-    console.log('create worker')
     await webdis.send(`XGROUP CREATECONSUMER mystream ${consumerGroupName} ${workerName}`)
     refresh()
   }
 
   const removeWorker = async (consumerGroupName: string, workerName: string) => {
-    console.log('remove worker')
     await webdis.send(`XGROUP DELCONSUMER mystream ${consumerGroupName} ${workerName}`)
     refresh()
   }

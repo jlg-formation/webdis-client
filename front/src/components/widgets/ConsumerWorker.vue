@@ -7,7 +7,6 @@ const props = defineProps<{
 }>()
 
 const streamStore = useStreamStore()
-console.log('streamStore: ', streamStore)
 
 const handleDelete = async (workerName: string) => {
   await streamStore.removeWorker(props.consumerGroupName, workerName)

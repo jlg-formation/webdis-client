@@ -11,7 +11,6 @@ const ratio = ref(0)
 
 const handleAdd = async () => {
   try {
-    console.log('submit')
     const BULK_SIZE = 1000
     processing.value = true
     ratio.value = 0
@@ -36,9 +35,7 @@ const handleAdd = async () => {
 
 const handleGet = async () => {
   try {
-    console.log('submit')
     const result: { PFCOUNT: number } = await webdis.send('PFCOUNT members')
-    console.log('result: ', result)
     cardinality.value = result.PFCOUNT
   } catch (err) {
     console.log('err: ', err)
@@ -46,7 +43,6 @@ const handleGet = async () => {
 }
 const handleRemove = async () => {
   try {
-    console.log('remove')
     await webdis.send('DEL members')
   } catch (err) {
     console.log('err: ', err)
@@ -55,7 +51,6 @@ const handleRemove = async () => {
 
 const handleGetLength = async () => {
   try {
-    console.log('get length')
     const result: { STRLEN: number } = await webdis.send('STRLEN members')
     length.value = result.STRLEN
   } catch (err) {

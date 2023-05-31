@@ -9,7 +9,6 @@ const props = defineProps<{
 
 const getNextCounter = () => {
   let result = 0
-  console.log('props.consumerGroup.workers: ', props.consumerGroup.workers)
   for (const worker of props.consumerGroup.workers) {
     const name: string = worker[1]
     const nbr = +name.replace(/^.*-(\d+)$/, '$1')
@@ -18,23 +17,15 @@ const getNextCounter = () => {
     }
   }
   result++
-  console.log('nextcounter: ', result)
   return result
 }
 
-const counter = ref(0)
-
 const handleCreateWorker = async () => {
-  await streamStore.createWorker(props.consumerGroup.name, `worker-${counter.value}`)
-  counter.value++
+  const counter = getNextCounter()
+  await streamStore.createWorker(props.consumerGroup.name, `worker-${counter}`)
 }
 
 const streamStore = useStreamStore()
-console.log('streamStore: ', streamStore)
-
-watch(props.consumerGroup, () => {
-  counter.value = getNextCounter()
-})
 </script>
 
 <template>
