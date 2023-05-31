@@ -12,12 +12,20 @@ const ratio = ref(0)
 const handleAdd = async () => {
   try {
     console.log('submit')
+    const BULK_SIZE = 1000
     processing.value = true
     ratio.value = 0
+    let items: string[] = []
     for (let i = 0; i < total.value; i++) {
-      await webdis.send('PFADD members ' + crypto.randomUUID())
+      items.push(crypto.randomUUID())
       ratio.value = i / total.value
+      if (items.length > BULK_SIZE) {
+        await webdis.send('PFADD members ' + items.join(' '))
+        items = []
+      }
     }
+    await webdis.send('PFADD members ' + items.join(' '))
+    items = []
   } catch (err) {
     console.log('err: ', err)
   } finally {
