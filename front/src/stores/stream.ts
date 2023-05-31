@@ -120,6 +120,16 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
+  const cleanProcessed = async () => {
+    const result: { XRANGE: StreamItem[] } = await webdis.send(
+      `XRANGE mystream - ${maxHousekeepingId.value}`
+    )
+    console.log('result: ', result)
+    const ids = result.XRANGE.map((i) => i.id)
+    await webdis.send(`XDEL mystream ${ids.join(' ')}`)
+    refresh()
+  }
+
   return {
     items,
     consumerGroups,
@@ -133,5 +143,6 @@ export const useStreamStore = defineStore('stream', () => {
     removeConsumer,
     pickOne,
     ack,
+    cleanProcessed,
   }
 })

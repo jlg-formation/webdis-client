@@ -16,6 +16,10 @@ const handleReset = async () => {
 const handleRefresh = async () => {
   await streamStore.refresh()
 }
+
+const handleClean = async () => {
+  await streamStore.cleanProcessed()
+}
 </script>
 
 <template>
@@ -24,6 +28,7 @@ const handleRefresh = async () => {
     <button @click="handleReset">Reset</button>
     <button @click="handleRefresh">Refresh</button>
     <button @click="handleAdd">Add Record</button>
+    <button @click="handleClean">Clean processed</button>
     <StreamObject />
     <StreamConsumerGroup />
   </main>
