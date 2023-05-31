@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useStreamStore } from '@/stores/stream'
+import { useStreamStore, type Consumer } from '@/stores/stream'
 
 const props = defineProps<{
-  consumer: any[]
+  consumer: Consumer
   consumerGroupName: string
 }>()
 
 const streamStore = useStreamStore()
 
 const handleDelete = async () => {
-  await streamStore.removeConsumer(props.consumerGroupName, props.consumer[1])
+  await streamStore.removeConsumer(props.consumerGroupName, props.consumer.name)
 }
 const handlePickOne = async () => {
-  await streamStore.pickOne(props.consumerGroupName, props.consumer[1])
+  await streamStore.pickOne(props.consumerGroupName, props.consumer.name)
 }
 </script>
 
@@ -20,7 +20,7 @@ const handlePickOne = async () => {
   <div class="consumer">
     <div>Consumer</div>
     <div class="info">
-      <div class="item" v-for="item in consumer" :key="item">{{ item }}</div>
+      <div class="item" v-for="item in consumer.info" :key="item">{{ item }}</div>
     </div>
     <button @click="handleDelete()">Delete</button>
     <button @click="handlePickOne()">Pick One</button>

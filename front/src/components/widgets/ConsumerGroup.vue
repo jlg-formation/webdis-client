@@ -9,7 +9,7 @@ const props = defineProps<{
 const getNextCounter = () => {
   let result = 0
   for (const consumer of props.consumerGroup.consumers) {
-    const name: string = consumer[1]
+    const name: string = consumer.name
     const nbr = +name.replace(/^.*-(\d+)$/, '$1')
     if (nbr > result) {
       result = nbr
@@ -39,7 +39,7 @@ const streamStore = useStreamStore()
     </div>
     <StreamConsumer
       v-for="consumer in consumerGroup.consumers"
-      :key="consumer"
+      :key="consumer.name"
       :consumer="consumer"
       :consumer-group-name="consumerGroup.name"
     />

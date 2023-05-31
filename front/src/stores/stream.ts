@@ -10,7 +10,20 @@ export interface StreamItem {
 export interface ConsumerGroup {
   name: string
   info: any[]
-  consumers: any[]
+  consumers: Consumer[]
+}
+
+export interface Consumer {
+  name: string
+  info: any[]
+  pendings: PendingInfo[]
+}
+
+export interface PendingInfo {
+  owner: string
+  id: string
+  elapsedTime: number
+  deliveries: number
 }
 
 export const useStreamStore = defineStore('stream', () => {
@@ -46,8 +59,18 @@ export const useStreamStore = defineStore('stream', () => {
         `XINFO CONSUMERS mystream ${consumerGroup.name}`
       )
       console.log('consumerListResult: ', consumerListResult)
-      consumerGroup.consumers = consumerListResult.XINFO
+      consumerGroup.consumers = consumerListResult.XINFO.map((c) => ({
+        name: c[1],
+        info: c,
+        pendings: [],
+      }))
+
+      const pendingResult: { XPENDING: PendingInfo[] } = await webdis.send(
+        `XPENDING mystream ${consumerGroup.name} - + ${consumerGroup.info[5]}`
+      )
+      console.log('pendingResult: ', pendingResult)
     }
+    console.log('consumerGroups.value: ', consumerGroups.value)
   }
 
   const createConsumerGroup = async (name: string) => {
