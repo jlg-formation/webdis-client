@@ -65,6 +65,13 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
+  const pickOne = async (consumerGroupName: string, consumerName: string) => {
+    await webdis.send(
+      `XREADGROUP GROUP ${consumerGroupName} ${consumerName} COUNT 1 STREAMS mystream >`
+    )
+    refresh()
+  }
+
   return {
     items,
     consumerGroups,
@@ -74,5 +81,6 @@ export const useStreamStore = defineStore('stream', () => {
     createConsumerGroup,
     createConsumer,
     removeConsumer,
+    pickOne,
   }
 })
