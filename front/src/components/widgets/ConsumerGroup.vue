@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ConsumerWorker from '@/components/widgets/ConsumerWorker.vue'
 import { useStreamStore, type ConsumerGroup } from '@/stores/stream'
-import { ref, watch } from 'vue'
 
 const props = defineProps<{
   consumerGroup: ConsumerGroup
