@@ -23,7 +23,12 @@ console.log('streamStore: ', streamStore)
     <div class="keyvalue">
       <div class="item" v-for="item in consumerGroup.info" :key="item">{{ item }}</div>
     </div>
-    <ConsumerWorker v-for="worker in consumerGroup.workers" :key="worker" :worker="worker" />
+    <ConsumerWorker
+      v-for="worker in consumerGroup.workers"
+      :key="worker"
+      :worker="worker"
+      :consumer-group-name="consumerGroup.name"
+    />
     <button @click="handleCreateWorker">Create Worker</button>
   </div>
 </template>

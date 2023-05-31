@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { useStreamStore } from '@/stores/stream'
 
-defineProps<{
+const props = defineProps<{
   worker: any[]
+  consumerGroupName: string
 }>()
 
 const streamStore = useStreamStore()
 console.log('streamStore: ', streamStore)
+
+const handleDelete = async (workerName: string) => {
+  await streamStore.removeWorker(props.consumerGroupName, workerName)
+}
 </script>
 
 <template>
@@ -15,6 +20,7 @@ console.log('streamStore: ', streamStore)
     <div class="info">
       <div class="item" v-for="item in worker" :key="item">{{ item }}</div>
     </div>
+    <button @click="handleDelete(worker[1])">Delete</button>
   </div>
 </template>
 

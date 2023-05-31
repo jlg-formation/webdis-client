@@ -65,5 +65,20 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
-  return { items, consumerGroups, refresh, add, reset, createConsumerGroup, createWorker }
+  const removeWorker = async (consumerGroupName: string, workerName: string) => {
+    console.log('remove worker')
+    await webdis.send(`XGROUP DELCONSUMER mystream ${consumerGroupName} ${workerName}`)
+    refresh()
+  }
+
+  return {
+    items,
+    consumerGroups,
+    refresh,
+    add,
+    reset,
+    createConsumerGroup,
+    createWorker,
+    removeWorker,
+  }
 })
