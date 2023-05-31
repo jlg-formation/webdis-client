@@ -24,11 +24,16 @@ const handleCreateConsumer = async () => {
   await streamStore.createConsumer(props.consumerGroup.name, `consumer-${counter}`)
 }
 
+const handleDeleteConsumerGroup = async () => {
+  await streamStore.deleteConsumerGroup(props.consumerGroup.name)
+}
+
 const streamStore = useStreamStore()
 </script>
 
 <template>
   <div class="consumer-group">
+    <button @click="handleDeleteConsumerGroup">Delete Consumer Group</button>
     <div class="keyvalue">
       <div class="item" v-for="item in consumerGroup.info" :key="item">{{ item }}</div>
     </div>

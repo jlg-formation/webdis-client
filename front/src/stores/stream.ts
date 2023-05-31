@@ -72,6 +72,11 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
+  const deleteConsumerGroup = async (consumerGroupName: string) => {
+    await webdis.send(`XGROUP DESTROY mystream ${consumerGroupName}`)
+    refresh()
+  }
+
   return {
     items,
     consumerGroups,
@@ -79,6 +84,7 @@ export const useStreamStore = defineStore('stream', () => {
     add,
     reset,
     createConsumerGroup,
+    deleteConsumerGroup,
     createConsumer,
     removeConsumer,
     pickOne,
