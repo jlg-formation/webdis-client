@@ -110,6 +110,11 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
+  const ack = async (consumerGroupName: string, id: string) => {
+    await webdis.send(`XACK mystream ${consumerGroupName} ${id}`)
+    refresh()
+  }
+
   return {
     items,
     consumerGroups,
@@ -121,5 +126,6 @@ export const useStreamStore = defineStore('stream', () => {
     createConsumer,
     removeConsumer,
     pickOne,
+    ack,
   }
 })

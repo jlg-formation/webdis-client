@@ -14,6 +14,10 @@ const handleDelete = async () => {
 const handlePickOne = async () => {
   await streamStore.pickOne(props.consumerGroupName, props.consumer.name)
 }
+
+const handleAck = async (id: string) => {
+  await streamStore.ack(props.consumerGroupName, id)
+}
 </script>
 
 <template>
@@ -23,7 +27,12 @@ const handlePickOne = async () => {
       <div class="item" v-for="item in consumer.info" :key="item">{{ item }}</div>
     </div>
     <div class="pendings">
-      <div class="item" v-for="item in consumer.pendings" :key="item.id">
+      <div
+        class="item"
+        v-for="item in consumer.pendings"
+        :key="item.id"
+        @click="handleAck(item.id)"
+      >
         {{ item.id.substring(2) }}
       </div>
     </div>
