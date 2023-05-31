@@ -2,6 +2,14 @@
 import { useStreamStore } from '@/stores/stream'
 import { onMounted } from 'vue'
 
+const canBeFlushed = (id: string, maxFlushableId: string): boolean => {
+  console.log('canBeFlushed id: ', id, 'x', maxFlushableId)
+
+  const idNbr = +id.substring(2)
+  const maxFlushableIdNbr = +maxFlushableId.substring(2)
+  return idNbr <= maxFlushableIdNbr
+}
+
 const streamStore = useStreamStore()
 
 onMounted(async () => {
@@ -11,7 +19,11 @@ onMounted(async () => {
 
 <template>
   <div class="stream">
-    <div class="item" v-for="item in streamStore.items" :key="item.id">
+    <div
+      :class="{ item: true, flushable: canBeFlushed(item.id, streamStore.maxHousekeepingId) }"
+      v-for="item in streamStore.items"
+      :key="item.id"
+    >
       {{ item.id.substring(2) }}
     </div>
   </div>
@@ -31,6 +43,10 @@ div.stream {
     justify-content: center;
     padding: 0.5em 1em;
     white-space: nowrap;
+
+    &.flushable {
+      background-color: #eee;
+    }
   }
 }
 </style>

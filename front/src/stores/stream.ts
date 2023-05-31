@@ -1,4 +1,5 @@
 import { webdis } from '@/webdis/Webdis'
+import { getMaxHousekeepingId } from '@/webdis/utils/stream.utils'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -29,6 +30,7 @@ export interface PendingInfo {
 export const useStreamStore = defineStore('stream', () => {
   const items: Ref<StreamItem[]> = ref([])
   const consumerGroups: Ref<ConsumerGroup[]> = ref([])
+  const maxHousekeepingId: Ref<string> = ref('0-0')
 
   const add = async () => {
     await webdis.send('XADD mystream 0-* x 10 y 3')
@@ -83,6 +85,7 @@ export const useStreamStore = defineStore('stream', () => {
       }
     }
     console.log('consumerGroups.value: ', consumerGroups.value)
+    maxHousekeepingId.value = await getMaxHousekeepingId(consumerGroups.value)
   }
 
   const createConsumerGroup = async (name: string) => {
@@ -120,6 +123,7 @@ export const useStreamStore = defineStore('stream', () => {
   return {
     items,
     consumerGroups,
+    maxHousekeepingId,
     refresh,
     add,
     reset,
