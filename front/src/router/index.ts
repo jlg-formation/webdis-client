@@ -35,8 +35,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  console.log('to: ', to)
-
   const webdisStore = useWebdisStore()
 
   if (typeof to.name === 'string' && ['home', 'legal', 'connection'].includes(to.name)) {

@@ -1,13 +1,28 @@
 <script setup lang="ts">
-import { useStreamStore, type ConsumerGroup } from '@/stores/stream'
 import ConsumerWorker from '@/components/widgets/ConsumerWorker.vue'
-import { ref } from 'vue'
+import { useStreamStore, type ConsumerGroup } from '@/stores/stream'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
   consumerGroup: ConsumerGroup
 }>()
 
-const counter = ref(props.consumerGroup.info[3])
+const getNextCounter = () => {
+  let result = 0
+  console.log('props.consumerGroup.workers: ', props.consumerGroup.workers)
+  for (const worker of props.consumerGroup.workers) {
+    const name: string = worker[1]
+    const nbr = +name.replace(/^.*-(\d+)$/, '$1')
+    if (nbr > result) {
+      result = nbr
+    }
+  }
+  result++
+  console.log('nextcounter: ', result)
+  return result
+}
+
+const counter = ref(0)
 
 const handleCreateWorker = async () => {
   await streamStore.createWorker(props.consumerGroup.name, `worker-${counter.value}`)
@@ -16,6 +31,10 @@ const handleCreateWorker = async () => {
 
 const streamStore = useStreamStore()
 console.log('streamStore: ', streamStore)
+
+watch(props.consumerGroup, () => {
+  counter.value = getNextCounter()
+})
 </script>
 
 <template>
