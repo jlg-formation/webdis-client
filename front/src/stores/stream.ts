@@ -41,6 +41,8 @@ export const useStreamStore = defineStore('stream', () => {
   }
 
   const refresh = async () => {
+    console.log('refresh')
+
     const result: { XRANGE: StreamItem[] } = await webdis.send('XRANGE mystream - +')
     items.value = result.XRANGE
 

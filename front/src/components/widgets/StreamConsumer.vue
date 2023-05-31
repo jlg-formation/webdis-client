@@ -24,16 +24,16 @@ const handleAck = async (id: string) => {
   <div class="consumer">
     <div>Consumer</div>
     <div class="info">
-      <div class="item" v-for="item in consumer.info" :key="item">{{ item }}</div>
+      <div class="item" v-for="(item, index) in consumer.info" :key="index">{{ item }}</div>
     </div>
     <div class="pendings">
       <div
         class="item"
-        v-for="item in consumer.pendings"
-        :key="item.id"
-        @click="handleAck(item.id)"
+        v-for="pending in consumer.pendings"
+        :key="consumer.name + '-' + pending.id"
+        @click="handleAck(pending.id)"
       >
-        {{ item.id.substring(2) }}
+        {{ pending.id.substring(2) }}
       </div>
     </div>
     <button @click="handleDelete()">Delete</button>
@@ -62,6 +62,7 @@ div.consumer {
       align-items: center;
       justify-content: center;
       padding: 0.5em;
+      cursor: pointer;
     }
   }
 }

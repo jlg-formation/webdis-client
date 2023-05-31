@@ -35,7 +35,7 @@ const streamStore = useStreamStore()
   <div class="consumer-group">
     <button @click="handleDeleteConsumerGroup">Delete Consumer Group</button>
     <div class="keyvalue">
-      <div class="item" v-for="item in consumerGroup.info" :key="item">{{ item }}</div>
+      <div class="item" v-for="(item, index) in consumerGroup.info" :key="index">{{ item }}</div>
     </div>
     <StreamConsumer
       v-for="consumer in consumerGroup.consumers"
