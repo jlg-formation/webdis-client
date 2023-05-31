@@ -18,7 +18,9 @@ class Webdis {
   }
 
   parseCommand(command: string) {
-    return command.replace(/ /g, '/')
+    const tokens = command.split(' ').map((t) => encodeURIComponent(t))
+
+    return tokens.join('/')
   }
 
   async ping(): Promise<boolean> {
