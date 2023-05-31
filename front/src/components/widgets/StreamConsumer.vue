@@ -2,29 +2,29 @@
 import { useStreamStore } from '@/stores/stream'
 
 const props = defineProps<{
-  worker: any[]
+  consumer: any[]
   consumerGroupName: string
 }>()
 
 const streamStore = useStreamStore()
 
-const handleDelete = async (workerName: string) => {
-  await streamStore.removeWorker(props.consumerGroupName, workerName)
+const handleDelete = async (consumerName: string) => {
+  await streamStore.removeConsumer(props.consumerGroupName, consumerName)
 }
 </script>
 
 <template>
-  <div class="consumer-worker">
-    <div>Worker</div>
+  <div class="consumer">
+    <div>Consumer</div>
     <div class="info">
-      <div class="item" v-for="item in worker" :key="item">{{ item }}</div>
+      <div class="item" v-for="item in consumer" :key="item">{{ item }}</div>
     </div>
-    <button @click="handleDelete(worker[1])">Delete</button>
+    <button @click="handleDelete(consumer[1])">Delete</button>
   </div>
 </template>
 
 <style scoped lang="scss">
-div.consumer-worker {
+div.consumer {
   border: 0.02em solid black;
   padding: 0.5em;
   display: flex;

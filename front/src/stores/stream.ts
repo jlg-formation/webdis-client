@@ -10,7 +10,7 @@ export interface StreamItem {
 export interface ConsumerGroup {
   name: string
   info: any[]
-  workers: any[]
+  consumers: any[]
 }
 
 export const useStreamStore = defineStore('stream', () => {
@@ -38,7 +38,7 @@ export const useStreamStore = defineStore('stream', () => {
     consumerGroups.value = consumerGroupResult.XINFO.map((c) => ({
       name: c[1],
       info: c,
-      workers: [],
+      consumers: [],
     }))
 
     for (const consumerGroup of consumerGroups.value) {
@@ -46,7 +46,7 @@ export const useStreamStore = defineStore('stream', () => {
         `XINFO CONSUMERS mystream ${consumerGroup.name}`
       )
       console.log('consumerListResult: ', consumerListResult)
-      consumerGroup.workers = consumerListResult.XINFO
+      consumerGroup.consumers = consumerListResult.XINFO
     }
   }
 
@@ -55,13 +55,13 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
-  const createWorker = async (consumerGroupName: string, workerName: string) => {
-    await webdis.send(`XGROUP CREATECONSUMER mystream ${consumerGroupName} ${workerName}`)
+  const createConsumer = async (consumerGroupName: string, consumerName: string) => {
+    await webdis.send(`XGROUP CREATECONSUMER mystream ${consumerGroupName} ${consumerName}`)
     refresh()
   }
 
-  const removeWorker = async (consumerGroupName: string, workerName: string) => {
-    await webdis.send(`XGROUP DELCONSUMER mystream ${consumerGroupName} ${workerName}`)
+  const removeConsumer = async (consumerGroupName: string, consumerName: string) => {
+    await webdis.send(`XGROUP DELCONSUMER mystream ${consumerGroupName} ${consumerName}`)
     refresh()
   }
 
@@ -72,7 +72,7 @@ export const useStreamStore = defineStore('stream', () => {
     add,
     reset,
     createConsumerGroup,
-    createWorker,
-    removeWorker,
+    createConsumer,
+    removeConsumer,
   }
 })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ConsumerWorker from '@/components/widgets/ConsumerWorker.vue'
+import StreamConsumer from '@/components/widgets/StreamConsumer.vue'
 import { useStreamStore, type ConsumerGroup } from '@/stores/stream'
 
 const props = defineProps<{
@@ -8,8 +8,8 @@ const props = defineProps<{
 
 const getNextCounter = () => {
   let result = 0
-  for (const worker of props.consumerGroup.workers) {
-    const name: string = worker[1]
+  for (const consumer of props.consumerGroup.consumers) {
+    const name: string = consumer[1]
     const nbr = +name.replace(/^.*-(\d+)$/, '$1')
     if (nbr > result) {
       result = nbr
@@ -19,9 +19,9 @@ const getNextCounter = () => {
   return result
 }
 
-const handleCreateWorker = async () => {
+const handleCreateConsumer = async () => {
   const counter = getNextCounter()
-  await streamStore.createWorker(props.consumerGroup.name, `worker-${counter}`)
+  await streamStore.createConsumer(props.consumerGroup.name, `consumer-${counter}`)
 }
 
 const streamStore = useStreamStore()
@@ -32,13 +32,13 @@ const streamStore = useStreamStore()
     <div class="keyvalue">
       <div class="item" v-for="item in consumerGroup.info" :key="item">{{ item }}</div>
     </div>
-    <ConsumerWorker
-      v-for="worker in consumerGroup.workers"
-      :key="worker"
-      :worker="worker"
+    <StreamConsumer
+      v-for="consumer in consumerGroup.consumers"
+      :key="consumer"
+      :consumer="consumer"
       :consumer-group-name="consumerGroup.name"
     />
-    <button @click="handleCreateWorker">Create Worker</button>
+    <button @click="handleCreateConsumer">Create Consumer</button>
   </div>
 </template>
 
