@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import StreamObject from '@/components/widgets/StreamObject.vue'
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <main>
+    <h1>Streams</h1>
+    <button>Add Record</button>
+    <StreamObject />
+  </main>
 </template>
 
 <style>
