@@ -69,6 +69,16 @@ export const useStreamStore = defineStore('stream', () => {
         `XPENDING mystream ${consumerGroup.name} - + ${consumerGroup.info[5]}`
       )
       console.log('pendingResult: ', pendingResult)
+      for (const pendingInfo of pendingResult.XPENDING) {
+        console.log('pendingInfo: ', pendingInfo)
+        const consumerName = pendingInfo.owner
+        const consumer = consumerGroup.consumers.find((c) => c.name === consumerName)
+        if (consumer === undefined) {
+          console.log('consumer not found: ', consumerName)
+          continue
+        }
+        consumer.pendings.push(pendingInfo)
+      }
     }
     console.log('consumerGroups.value: ', consumerGroups.value)
   }
