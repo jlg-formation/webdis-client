@@ -19,7 +19,6 @@ class Webdis {
 
   parseCommand(command: string) {
     const tokens = command.split(' ').map((t) => encodeURIComponent(t))
-
     return tokens.join('/')
   }
 

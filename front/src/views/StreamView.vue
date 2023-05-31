@@ -7,22 +7,19 @@ const streamStore = useStreamStore()
 const handleAdd = async () => {
   await streamStore.add()
 }
+
+const handleReset = async () => {
+  await streamStore.reset()
+}
 </script>
 
 <template>
   <main>
     <h1>Streams</h1>
+    <button @click="handleReset">Reset</button>
     <button @click="handleAdd">Add Record</button>
     <StreamObject />
   </main>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
