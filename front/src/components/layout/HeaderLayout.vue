@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useWebdisStore } from '@/stores/webdis'
+
+const webdisStore = useWebdisStore()
+</script>
 
 <template>
   <header>
@@ -6,6 +10,12 @@
       <img src="images/logo.svg" alt="Redis Client" />
       <span>Web Tester</span>
     </RouterLink>
+
+    <div class="status">
+      <RouterLink to="/connection">{{
+        webdisStore.isConnected ? 'Connected' : 'Not Connected'
+      }}</RouterLink>
+    </div>
   </header>
 </template>
 
@@ -15,9 +25,11 @@ header {
   height: 3em;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   a {
     border-right: 0.02em solid transparent;
+    border-left: 0.02em solid transparent;
     border-bottom: 0.02em solid transparent;
     height: 3em;
     display: flex;
@@ -42,6 +54,10 @@ header {
       font-weight: bold;
       font-size: 1.3em;
     }
+  }
+
+  div.status {
+    display: flex;
   }
 }
 </style>

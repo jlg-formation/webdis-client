@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import PingPong from '../components/redis/PingPong.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main>
@@ -9,7 +7,6 @@ import PingPong from '../components/redis/PingPong.vue'
       <RouterLink to="hyperloglog" class="button">Hyperloglog</RouterLink>
       <RouterLink to="stream" class="button primary">Streams</RouterLink>
     </nav>
-    <PingPong />
   </main>
 </template>
 

@@ -11,6 +11,21 @@ class Webdis {
   parseCommand(command: string) {
     return command.replace(/ /g, '/')
   }
+
+  async ping(): Promise<boolean> {
+    try {
+      const json: { PING: [true, string] } = await webdis.send('PING')
+      const pong = json.PING[1]
+      if (pong !== 'PONG') {
+        throw new Error('bad value')
+      }
+      this.tested = true
+      return this.tested
+    } catch (err) {
+      this.tested = false
+      throw err
+    }
+  }
 }
 
 export const webdis = new Webdis()

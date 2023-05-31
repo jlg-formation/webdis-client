@@ -1,24 +1,23 @@
 <script setup lang="ts">
+import { useWebdisStore } from '@/stores/webdis'
 import { webdis } from '@/webdis/Webdis'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const url = ref(webdis.url)
 const result = ref('')
+const webdisStore = useWebdisStore()
+const router = useRouter()
 
 const handleSubmit = async () => {
   try {
     console.log('submit')
-    result.value = ''
-    webdis.url = url.value
-    const json: { PING: [true, string] } = await webdis.send('PING')
-    result.value = json.PING[1]
-    if (result.value !== 'PONG') {
-      throw new Error('bad value')
-    }
-    webdis.tested = true
+    await webdisStore.checkConnection(url.value)
+    result.value = 'Success!'
+    router.push(webdisStore.afterConnectRoute)
   } catch (err) {
     console.log('err: ', err)
-    result.value = 'connection error'
+    result.value = 'Connection error'
   }
 }
 </script>
