@@ -7,7 +7,7 @@ const webdisStore = useWebdisStore()
 <template>
   <header>
     <RouterLink to="/">
-      <img src="images/logo.svg" alt="Redis Client" />
+      <img src="/images/logo.svg" alt="Redis Client" />
       <span>Web Tester</span>
     </RouterLink>
 

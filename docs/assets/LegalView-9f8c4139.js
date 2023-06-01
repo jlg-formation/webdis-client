@@ -1,0 +1,1 @@
+import{_ as t,o as _,c as a,a as e,b as n}from"./index-36a51f52.js";const o={},s=e("h1",null,"Legal",-1),c=e("p",null,[n(" Open Source website: "),e("a",{href:"#",target:"_blank"},"to be filled")],-1),l=[s,c];function r(i,d){return _(),a("main",null,l)}const f=t(o,[["render",r]]);export{f as default};
