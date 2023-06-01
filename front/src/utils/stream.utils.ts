@@ -1,5 +1,5 @@
 import type { ConsumerGroup } from '@/stores/stream'
-import { webdis } from '../Webdis'
+import { webdis } from '../webdis/Webdis'
 
 export interface PendingResume {
   msgs: number

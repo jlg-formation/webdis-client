@@ -1,26 +1,14 @@
 <script setup lang="ts">
 import StreamConsumer from '@/components/widgets/StreamConsumer.vue'
 import { useStreamStore, type ConsumerGroup } from '@/stores/stream'
+import { getNextCounter } from '@/utils/counter.utils'
 
 const props = defineProps<{
   consumerGroup: ConsumerGroup
 }>()
 
-const getNextCounter = () => {
-  let result = 0
-  for (const consumer of props.consumerGroup.consumers) {
-    const name: string = consumer.name
-    const nbr = +name.replace(/^.*-(\d+)$/, '$1')
-    if (nbr > result) {
-      result = nbr
-    }
-  }
-  result++
-  return result
-}
-
 const handleCreateConsumer = async () => {
-  const counter = getNextCounter()
+  const counter = getNextCounter(props.consumerGroup.consumers.map((c) => c.name))
   await streamStore.createConsumer(props.consumerGroup.name, `consumer-${counter}`)
 }
 

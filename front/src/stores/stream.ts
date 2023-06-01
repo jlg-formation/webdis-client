@@ -1,5 +1,5 @@
 import { webdis } from '@/webdis/Webdis'
-import { getMaxHousekeepingId } from '@/webdis/utils/stream.utils'
+import { getMaxHousekeepingId } from '@/utils/stream.utils'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
