@@ -54,7 +54,7 @@ div.consumer-group {
   display: flex;
   flex-flow: column;
   div.header {
-    background-color: #eee;
+    background-color: #ddd;
     border-bottom: 0.02em solid black;
     display: flex;
     justify-content: space-between;
@@ -72,14 +72,17 @@ div.consumer-group {
     .button {
       cursor: pointer;
       &:hover {
-        background-color: #ddd;
+        background-color: #ccc;
       }
       &:hover {
-        background-color: #ccc;
+        background-color: #bbb;
       }
     }
   }
   div.main {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5em;
     padding: 0.5em;
     div.keyvalue {
       display: flex;

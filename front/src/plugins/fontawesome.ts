@@ -9,9 +9,10 @@ import {
   faPlus,
   faRecycle,
   faXmark,
+  faArrowDown,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUserSecret, faTrashAlt, faRotateRight, faPlus, faRecycle, faXmark)
+library.add(faUserSecret, faTrashAlt, faRotateRight, faPlus, faRecycle, faXmark, faArrowDown)
 
 export const icons: Plugin = {
   install: (app) => {

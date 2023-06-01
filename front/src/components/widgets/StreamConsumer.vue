@@ -22,40 +22,86 @@ const handleAck = async (id: string) => {
 
 <template>
   <div class="consumer">
-    <div>Consumer</div>
-    <div class="info">
-      <div class="item" v-for="(item, index) in consumer.info" :key="index">{{ item }}</div>
-    </div>
-    <div class="pendings">
-      <div
-        class="item"
-        v-for="pending in consumer.pendings"
-        :key="consumer.name + '-' + pending.id"
-        @click="handleAck(pending.id)"
-      >
-        {{ pending.id.substring(2) }}
+    <div class="header">
+      <span>Consumer</span>
+      <div class="button" @click="handleDelete()">
+        <font-awesome-icon icon="fa-solid fa-trash-alt" />
       </div>
     </div>
-    <button @click="handleDelete()">Delete</button>
-    <button @click="handlePickOne()">Pick One</button>
+    <div class="main">
+      <div class="keyvalue">
+        <div class="item" v-for="(item, index) in consumer.info" :key="index">{{ item }}</div>
+      </div>
+
+      <button @click="handlePickOne()">
+        <font-awesome-icon icon="fa-solid fa-arrow-down" />
+        <span>Pick One</span>
+      </button>
+
+      <div class="pendings">
+        <div
+          class="item"
+          v-for="pending in consumer.pendings"
+          :key="consumer.name + '-' + pending.id"
+          @click="handleAck(pending.id)"
+        >
+          {{ pending.id.substring(2) }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 div.consumer {
   border: 0.02em solid black;
-  padding: 0.5em;
-  display: flex;
-  flex-flow: column;
-  align-items: start;
-
-  div.info {
+  div.header {
+    background-color: #eee;
+    border-bottom: 0.02em solid black;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span,
+    .button {
+      height: 2em;
+      padding: 0 0.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      cursor: pointer;
+      &:hover {
+        background-color: #ddd;
+      }
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+
+  div.main {
+    display: flex;
+    flex-flow: column;
     gap: 0.5em;
+    align-items: start;
+    div.keyvalue {
+      display: flex;
+      align-items: center;
+      height: 2em;
+      gap: 0.5em;
+      div.item {
+        display: flex;
+        gap: 0.5em;
+      }
+    }
   }
 
   div.pendings {
     display: flex;
+    gap: 0.5em;
     div.item {
       border: 0.02em solid black;
       display: flex;
