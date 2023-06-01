@@ -19,6 +19,7 @@ onMounted(async () => {
 
 <template>
   <div class="stream">
+    <div class="no-stream" v-if="!streamStore.exists">No Stream</div>
     <div
       :class="{ item: true, flushable: canBeFlushed(item.id, streamStore.maxHousekeepingId) }"
       v-for="item in streamStore.items"
@@ -31,10 +32,12 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 div.stream {
+  height: 3em;
   width: 100%;
   max-width: 100ch;
   overflow-x: auto;
   display: flex;
+  align-items: center;
 
   div.item {
     border: 0.02em solid black;

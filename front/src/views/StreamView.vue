@@ -43,7 +43,7 @@ const handleClean = async () => {
         </button>
       </nav>
       <StreamObject />
-      <StreamConsumerGroup />
+      <StreamConsumerGroup v-if="streamStore.exists" />
     </div>
   </main>
 </template>

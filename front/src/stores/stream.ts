@@ -29,6 +29,7 @@ export interface PendingInfo {
 }
 
 export const useStreamStore = defineStore('stream', () => {
+  const exists: Ref<boolean> = ref(false)
   const items: Ref<StreamItem[]> = ref([])
   const consumerGroups: Ref<ConsumerGroup[]> = ref([])
   const maxHousekeepingId: Ref<string> = ref('0-0')
@@ -43,18 +44,22 @@ export const useStreamStore = defineStore('stream', () => {
     await refresh()
   }
 
-  const refresh = async () => {
-    console.log('refresh')
-
+  const init = () => {
     items.value = []
     consumerGroups.value = []
     maxHousekeepingId.value = '0-0'
+  }
 
-    const exists = await isStreamExisting('mystream')
+  const refresh = async () => {
+    console.log('refresh')
 
-    if (!exists) {
+    exists.value = await isStreamExisting('mystream')
+
+    if (!exists.value) {
+      init()
       return
     }
+
     const result: { XRANGE: StreamItem[] } = await webdis.send('XRANGE mystream - +')
     items.value = result.XRANGE
 
@@ -141,6 +146,7 @@ export const useStreamStore = defineStore('stream', () => {
   }
 
   return {
+    exists,
     items,
     consumerGroups,
     maxHousekeepingId,
