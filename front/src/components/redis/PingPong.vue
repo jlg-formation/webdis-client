@@ -11,7 +11,8 @@ const router = useRouter()
 
 const handleSubmit = async () => {
   try {
-    await webdisStore.checkConnection(url.value)
+    webdisStore.setUrl(url.value)
+    await webdisStore.checkConnection()
     result.value = 'Success!'
     router.push(webdisStore.afterConnectRoute)
   } catch (err) {

@@ -13,7 +13,7 @@ const webdisStore = useWebdisStore()
 
     <div class="status">
       <RouterLink to="/connection">{{
-        webdisStore.isConnected ? 'Connected' : 'Not Connected'
+        webdisStore.isConnected ? `Connected to Webdis at ${webdisStore.url}` : 'Not Connected'
       }}</RouterLink>
     </div>
   </header>

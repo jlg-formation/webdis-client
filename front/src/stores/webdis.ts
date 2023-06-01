@@ -4,10 +4,15 @@ import { ref } from 'vue'
 
 export const useWebdisStore = defineStore('webdis', () => {
   const isConnected = ref(webdis.tested)
+  const url = ref(webdis.url)
   const afterConnectRoute = ref('/')
-  const checkConnection = async (url: string) => {
+
+  const setUrl = (newUrl: string) => {
+    url.value = newUrl
+  }
+  const checkConnection = async () => {
     try {
-      webdis.url = url
+      webdis.url = url.value
       isConnected.value = await webdis.ping()
     } catch (err) {
       isConnected.value = false
@@ -15,5 +20,5 @@ export const useWebdisStore = defineStore('webdis', () => {
     }
   }
 
-  return { isConnected, checkConnection, afterConnectRoute }
+  return { isConnected, url, checkConnection, afterConnectRoute, setUrl }
 })

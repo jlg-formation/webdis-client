@@ -41,6 +41,8 @@ router.beforeEach(async (to) => {
     return
   }
 
+  await webdisStore.checkConnection()
+
   if (!webdisStore.isConnected) {
     webdisStore.afterConnectRoute = to.fullPath
     return { name: 'connection' }
