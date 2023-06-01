@@ -2,6 +2,7 @@ import { webdis } from '@/webdis/Webdis'
 import { getMaxHousekeepingId } from '@/utils/stream.utils'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
+import { isStreamExisting } from '@/utils/refresh.utils'
 
 export interface StreamItem {
   id: string
@@ -45,6 +46,15 @@ export const useStreamStore = defineStore('stream', () => {
   const refresh = async () => {
     console.log('refresh')
 
+    items.value = []
+    consumerGroups.value = []
+    maxHousekeepingId.value = '0-0'
+
+    const exists = await isStreamExisting('mystream')
+
+    if (!exists) {
+      return
+    }
     const result: { XRANGE: StreamItem[] } = await webdis.send('XRANGE mystream - +')
     items.value = result.XRANGE
 

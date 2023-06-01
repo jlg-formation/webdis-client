@@ -25,13 +25,34 @@ const handleClean = async () => {
 <template>
   <main>
     <h1>Streams</h1>
-    <button @click="handleReset">Reset</button>
-    <button @click="handleRefresh">Refresh</button>
-    <button @click="handleAdd">Add Record</button>
-    <button @click="handleClean">Clean processed</button>
-    <StreamObject />
-    <StreamConsumerGroup />
+    <div class="content">
+      <nav>
+        <button @click="handleRefresh" title="Refresh">
+          <font-awesome-icon icon="fa-solid fa-rotate-right" />
+        </button>
+        <button @click="handleAdd">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+          <span>Add Record</span>
+        </button>
+        <button @click="handleClean">
+          <font-awesome-icon icon="fa-solid fa-recycle" />
+          <span>Clean</span>
+        </button>
+        <button @click="handleReset" title="Delete Stream">
+          <font-awesome-icon icon="fa-solid fa-trash-alt" />
+        </button>
+      </nav>
+      <StreamObject />
+      <StreamConsumerGroup />
+    </div>
   </main>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+div.content {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}
+</style>
