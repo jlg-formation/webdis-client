@@ -26,22 +26,26 @@ const handleClean = async () => {
   <main>
     <h1>Streams</h1>
     <div class="content">
-      <nav>
-        <button @click="handleRefresh" title="Refresh">
-          <font-awesome-icon icon="fa-solid fa-rotate-right" />
-        </button>
-        <button @click="handleAdd" title="Add a new entry to the stream">
-          <font-awesome-icon icon="fa-solid fa-plus" />
-          <span>Entry</span>
-        </button>
-        <button @click="handleClean">
-          <font-awesome-icon icon="fa-solid fa-recycle" />
-          <span>Clean</span>
-        </button>
-        <button @click="handleReset" title="Delete Stream">
-          <font-awesome-icon icon="fa-solid fa-trash-alt" />
-        </button>
-      </nav>
+      <div class="buttons">
+        <nav>
+          <button @click="handleRefresh" title="Refresh">
+            <font-awesome-icon icon="fa-solid fa-rotate-right" />
+          </button>
+          <button @click="handleAdd" title="Add a new entry to the stream">
+            <font-awesome-icon icon="fa-solid fa-plus" />
+            <span>Entry</span>
+          </button>
+          <button @click="handleClean">
+            <font-awesome-icon icon="fa-solid fa-recycle" />
+            <span>Clean</span>
+          </button>
+        </nav>
+        <nav>
+          <button @click="handleReset" title="Delete Stream">
+            <font-awesome-icon icon="fa-solid fa-trash-alt" />
+          </button>
+        </nav>
+      </div>
       <StreamObject />
       <StreamConsumerGroup v-if="streamStore.exists" />
     </div>
@@ -54,5 +58,10 @@ div.content {
   display: flex;
   flex-flow: column;
   gap: 0.5em;
+
+  div.buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>

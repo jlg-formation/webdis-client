@@ -35,7 +35,7 @@ const handleAck = async (id: string) => {
 
       <button @click="handlePickOne()">
         <font-awesome-icon icon="fa-solid fa-arrow-down" />
-        <span>Pick One</span>
+        <span>Pick one entry</span>
       </button>
 
       <div class="pendings">
@@ -87,6 +87,7 @@ div.consumer {
     flex-flow: column;
     gap: 0.5em;
     align-items: start;
+    padding: 0.5em;
     div.keyvalue {
       display: flex;
       align-items: center;
