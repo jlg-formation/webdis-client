@@ -13,14 +13,17 @@ const handleCreate = async () => {
 </script>
 
 <template>
-  <div class="consumer-group">
-    <button @click="handleCreate">Create Consumer Group</button>
+  <div class="consumer-groups">
+    <button @click="handleCreate" title="Add a new consumer group">
+      <font-awesome-icon icon="fa-solid fa-plus" />
+      <span>Consumer Group</span>
+    </button>
     <ListConsumerGroup />
   </div>
 </template>
 
 <style scoped lang="scss">
-div.consumer-group {
+div.consumer-groups {
   width: 100%;
   display: flex;
   align-items: start;

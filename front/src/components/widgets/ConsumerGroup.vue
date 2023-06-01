@@ -21,35 +21,86 @@ const streamStore = useStreamStore()
 
 <template>
   <div class="consumer-group">
-    <button @click="handleDeleteConsumerGroup">Delete Consumer Group</button>
-    <div class="keyvalue">
-      <div class="item" v-for="(item, index) in consumerGroup.info" :key="index">{{ item }}</div>
+    <div class="header">
+      <span>Consumer Group</span>
+      <div @click="handleDeleteConsumerGroup" class="button">
+        <font-awesome-icon icon="fa-solid fa-trash-alt" />
+      </div>
     </div>
-    <StreamConsumer
-      v-for="consumer in consumerGroup.consumers"
-      :key="consumer.name"
-      :consumer="consumer"
-      :consumer-group-name="consumerGroup.name"
-    />
-    <button @click="handleCreateConsumer">Create Consumer</button>
+    <div class="main">
+      <div class="keyvalue">
+        <div class="item" v-for="(item, index) in consumerGroup.info" :key="index">{{ item }}</div>
+      </div>
+
+      <nav>
+        <button @click="handleCreateConsumer">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+          <span>Consumer</span>
+        </button>
+      </nav>
+      <StreamConsumer
+        v-for="consumer in consumerGroup.consumers"
+        :key="consumer.name"
+        :consumer="consumer"
+        :consumer-group-name="consumerGroup.name"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 div.consumer-group {
   border: 0.02em solid black;
+  display: flex;
+  flex-flow: column;
+  div.header {
+    background-color: #eee;
+    border-bottom: 0.02em solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span,
+    .button {
+      height: 2em;
+      padding: 0 0.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      cursor: pointer;
+      &:hover {
+        background-color: #ddd;
+      }
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+  div.main {
+    padding: 0.5em;
+    div.keyvalue {
+      display: flex;
+      align-items: center;
+      height: 2em;
+      gap: 0.5em;
+      div.item {
+        display: flex;
+        gap: 0.5em;
+      }
+    }
+  }
+}
+/* div.consumer-group {
+  
   padding: 0.5em;
   display: flex;
   flex-flow: column;
   align-items: start;
+  gap: 0.5em;
 
-  div.keyvalue {
-    display: flex;
-    div.item {
-      padding: 0.5em;
-      display: flex;
-      gap: 0.5em;
-    }
-  }
-}
+  
+} */
 </style>

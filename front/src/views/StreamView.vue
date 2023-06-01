@@ -30,9 +30,9 @@ const handleClean = async () => {
         <button @click="handleRefresh" title="Refresh">
           <font-awesome-icon icon="fa-solid fa-rotate-right" />
         </button>
-        <button @click="handleAdd">
+        <button @click="handleAdd" title="Add a new entry to the stream">
           <font-awesome-icon icon="fa-solid fa-plus" />
-          <span>Add Record</span>
+          <span>Entry</span>
         </button>
         <button @click="handleClean">
           <font-awesome-icon icon="fa-solid fa-recycle" />
