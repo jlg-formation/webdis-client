@@ -36,7 +36,6 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const webdisStore = useWebdisStore()
-  webdisStore.afterConnectRoute = '/'
 
   const publicRoutes = ['home', 'legal', 'connection']
 
@@ -50,6 +49,7 @@ router.beforeEach(async (to) => {
     webdisStore.afterConnectRoute = to.fullPath
     return { name: 'connection' }
   }
+  webdisStore.afterConnectRoute = '/'
 })
 
 export default router
