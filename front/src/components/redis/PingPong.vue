@@ -32,10 +32,11 @@ const handleDisconnect = async () => {
       <span>Webdis URL</span>
       <input type="text" v-model="url" />
     </label>
-    <button>Connect</button>
-    <div class="result">
+
+    <div class="error">
       {{ result }}
     </div>
+    <button class="primary">Connect</button>
   </form>
 </template>
 
@@ -47,10 +48,12 @@ form.connect {
   flex-flow: column;
   gap: 0.5em;
 
-  div.result {
+  div.error {
     height: 2em;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-weight: bold;
   }
 }
 </style>
