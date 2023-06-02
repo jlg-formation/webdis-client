@@ -16,7 +16,6 @@ export const useWebdisStore = defineStore('webdis', () => {
       isConnected.value = await webdis.ping()
     } catch (err) {
       isConnected.value = false
-      throw err
     }
   }
 

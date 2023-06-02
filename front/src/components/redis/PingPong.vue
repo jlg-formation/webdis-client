@@ -1,24 +1,27 @@
 <script setup lang="ts">
 import { useWebdisStore } from '@/stores/webdis'
-import { webdis } from '@/webdis/Webdis'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const url = ref(webdis.url)
 const result = ref('')
 const webdisStore = useWebdisStore()
+const url = ref(webdisStore.url === '' ? 'http://127.0.0.1:7379' : webdisStore.url)
 const router = useRouter()
 
 const handleSubmit = async () => {
-  try {
-    webdisStore.setUrl(url.value)
-    await webdisStore.checkConnection()
-    result.value = 'Success!'
-    router.push(webdisStore.afterConnectRoute)
-  } catch (err) {
-    console.log('err: ', err)
+  webdisStore.setUrl(url.value)
+  await webdisStore.checkConnection()
+  if (!webdisStore.isConnected) {
     result.value = 'Connection error'
+    return
   }
+  result.value = 'Success!'
+  router.push(webdisStore.afterConnectRoute)
+}
+
+const handleDisconnect = async () => {
+  webdisStore.setUrl('')
+  await webdisStore.checkConnection()
 }
 </script>
 
@@ -28,11 +31,12 @@ const handleSubmit = async () => {
       <span>Webdis URL</span>
       <input type="text" v-model="url" />
     </label>
-    <button>Test Ping Pong</button>
+    <button>Test Connection</button>
     <div class="result">
       {{ result }}
     </div>
   </form>
+  <button @click="handleDisconnect">Disconnect</button>
 </template>
 
 <style scoped lang="scss">

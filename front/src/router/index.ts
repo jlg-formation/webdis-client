@@ -5,7 +5,6 @@ import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-
   routes: [
     {
       path: '/',
@@ -37,8 +36,11 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const webdisStore = useWebdisStore()
+  webdisStore.afterConnectRoute = '/'
 
-  if (typeof to.name === 'string' && ['home', 'legal', 'connection'].includes(to.name)) {
+  const publicRoutes = ['home', 'legal', 'connection']
+
+  if (typeof to.name === 'string' && publicRoutes.includes(to.name)) {
     return
   }
 
