@@ -135,6 +135,11 @@ export const useStreamStore = defineStore('stream', () => {
     refresh()
   }
 
+  const claim = async (consumerGroupName: string, consumerName: string) => {
+    await webdis.send(`XAUTOCLAIM mystream ${consumerGroupName} ${consumerName} 10000 0-0 COUNT 1`)
+    refresh()
+  }
+
   const cleanProcessed = async () => {
     const result: { XRANGE: StreamItem[] } = await webdis.send(
       `XRANGE mystream - ${maxHousekeepingId.value}`
@@ -160,5 +165,6 @@ export const useStreamStore = defineStore('stream', () => {
     pickOne,
     ack,
     cleanProcessed,
+    claim,
   }
 })

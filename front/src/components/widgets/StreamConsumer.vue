@@ -18,6 +18,10 @@ const handlePickOne = async () => {
 const handleAck = async (id: string) => {
   await streamStore.ack(props.consumerGroupName, id)
 }
+
+const handleClaim = async () => {
+  await streamStore.claim(props.consumerGroupName, props.consumer.name)
+}
 </script>
 
 <template>
@@ -33,10 +37,16 @@ const handleAck = async (id: string) => {
         <div class="item" v-for="(item, index) in consumer.info" :key="index">{{ item }}</div>
       </div>
 
-      <button @click="handlePickOne()">
-        <font-awesome-icon icon="fa-solid fa-arrow-down" />
-        <span>Pick one entry</span>
-      </button>
+      <nav>
+        <button @click="handlePickOne()">
+          <font-awesome-icon icon="fa-solid fa-arrow-down" />
+          <span>Pick one entry</span>
+        </button>
+        <button @click="handleClaim()">
+          <font-awesome-icon icon="fa-solid fa-hourglass-end" />
+          <span>Claim pending &gt;10s</span>
+        </button>
+      </nav>
 
       <div class="pendings">
         <div
