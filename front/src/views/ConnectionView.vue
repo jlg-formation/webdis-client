@@ -19,7 +19,6 @@ import PingPong from '@/components/redis/PingPong.vue'
 
 <style scoped lang="scss">
 main {
-  flex: 0;
   nav {
     margin-bottom: 3em;
   }

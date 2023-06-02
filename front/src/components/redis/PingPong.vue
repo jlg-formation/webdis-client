@@ -26,17 +26,17 @@ const handleDisconnect = async () => {
 </script>
 
 <template>
-  <form class="connect" @submit.prevent="handleSubmit">
+  <button @click="handleDisconnect" v-if="webdisStore.isConnected">Disconnect</button>
+  <form v-else class="connect" @submit.prevent="handleSubmit">
     <label>
       <span>Webdis URL</span>
       <input type="text" v-model="url" />
     </label>
-    <button>Test Connection</button>
+    <button>Connect</button>
     <div class="result">
       {{ result }}
     </div>
   </form>
-  <button @click="handleDisconnect">Disconnect</button>
 </template>
 
 <style scoped lang="scss">

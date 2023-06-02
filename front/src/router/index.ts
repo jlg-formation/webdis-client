@@ -35,21 +35,19 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  const webdisStore = useWebdisStore()
-
   const publicRoutes = ['home', 'legal', 'connection']
-
   if (typeof to.name === 'string' && publicRoutes.includes(to.name)) {
     return
   }
 
-  await webdisStore.checkConnection()
+  const webdisStore = useWebdisStore()
+  webdisStore.afterConnectRoute = '/'
 
+  await webdisStore.checkConnection()
   if (!webdisStore.isConnected) {
     webdisStore.afterConnectRoute = to.fullPath
     return { name: 'connection' }
   }
-  webdisStore.afterConnectRoute = '/'
 })
 
 export default router
