@@ -24,8 +24,8 @@ The webdis project is on Github at https://github.com/nicolasff/webdis.
 
 Two directories :
 
-- front : contains the source code of the front-end. The project uses the [Vuejs framework](https://vuejs.org/).
-- docs : It is the production build of the VueJS project, ready to be understood as a github page. You can access it on https://jlg-formation.github.io/webdis-client/
+- **front** : contains the source code of the project. It is just a front-end SPA application. The project uses the [Vuejs framework](https://vuejs.org/).
+- **docs** : It is the production build of the VueJS project, ready to be understood as a github page. You can access it on https://jlg-formation.github.io/webdis-client/
 
 ## Author
 
